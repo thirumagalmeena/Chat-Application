@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echo - College Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Authentication Container -->
+        <div id="auth-container">
+            <div class="logo">
+                <i class="fas fa-comments"></i>
+                <h1>Echo</h1>
+                <p>College Chat Application</p>
+            </div>
+            
+            <div id="auth-options">
+                <button id="login-btn" class="auth-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button id="register-btn" class="auth-btn">
+                    <i class="fas fa-user-plus"></i> Register
+                </button>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="login-form" class="auth-form hidden">
+                <h2>Student Login</h2>
+                <div class="form-group">
+                    <label for="login-roll">Roll Number</label>
+                    <input type="text" id="login-roll" placeholder="23pd01" pattern="23pd(0[1-9]|[12][0-9]|3[0-9]|40)" required>
+                    <small>Format: 23pd01 to 23pd40</small>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                </div>
+                <button id="submit-login" class="submit-btn">Login</button>
+                <div id="login-message" class="message"></div>
+            </div>
+            
+            <!-- Registration Form -->
+            <div id="register-form" class="auth-form hidden">
+                <h2>Student Registration</h2>
+                <div class="form-group">
+                    <label for="register-roll">Roll Number</label>
+                    <input type="text" id="register-roll" placeholder="23pd01" pattern="23pd(0[1-9]|[12][0-9]|3[0-9]|40)" required>
+                    <small>Format: 23pd01 to 23pd40</small>
+                </div>
+                <div class="form-group">
+                    <label for="register-name">Full Name</label>
+                    <input type="text" id="register-name" placeholder="Your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" placeholder="Password (min 6 characters)" minlength="6" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm">Confirm Password</label>
+                    <input type="password" id="register-confirm" placeholder="Confirm password" required>
+                </div>
+                <button id="submit-register" class="submit-btn">Register</button>
+                <div id="register-message" class="message"></div>
+            </div>
+        </div>
+
+        <!-- Main Application Interface -->
+        <div id="main-interface" class="hidden">
+            <header class="app-header">
+                <div class="user-info">
+                    <span id="current-user">
+                        <i class="fas fa-user"></i> 
+                        <span class="username"></span>
+                        <span class="roll"></span>
+                    </span>
+                    <button id="logout-btn" class="icon-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="main-content">
+                <!-- Initial Action Buttons -->
+                <div class="action-buttons">
+                    <button id="join-client" class="primary-btn">
+                        <i class="fas fa-user-friends"></i> Join Chat
+                    </button>
+                    <button id="create-room" class="primary-btn">
+                        <i class="fas fa-plus-circle"></i> Create Room
+                    </button>
+                </div>
+
+                <!-- Client Join Form -->
+                <div id="client-form" class="hidden">
+                    <h2>Join Chat</h2>
+                    <div class="form-group">
+                        <label for="username">Display Name</label>
+                        <input type="text" id="username" placeholder="How others will see you">
+                    </div>
+                    <button id="submit-username" class="submit-btn">Continue</button>
+                </div>
+
+                <!-- Room Creation Form -->
+                <div id="room-form" class="hidden">
+                    <h2>Create Room</h2>
+                    <div class="form-group">
+                        <label for="room-name">Room Name</label>
+                        <input type="text" id="room-name" placeholder="Enter room name">
+                    </div>
+                    <button id="submit-room" class="submit-btn">Create</button>
+                </div>
+
+                <!-- Room Selection -->
+                <div id="room-selection" class="hidden">
+                    <div class="section-header">
+                        <h2><i class="fas fa-door-open"></i> Available Rooms</h2>
+                    </div>
+                    <div id="room-list-container">
+                        <p id="no-rooms-message" class="no-rooms">No rooms available. Create one!</p>
+                    </div>
+                </div>
+
+                <!-- Chat Interface -->
+                <div id="chat-interface" class="hidden">
+                    <div class="chat-header">
+                        <h2 id="room-title">
+                            <i class="fas fa-hashtag"></i> <span id="current-room-name"></span>
+                        </h2>
+                        <button id="leave-room" class="icon-btn">
+                            <i class="fas fa-times"></i> Leave
+                        </button>
+                    </div>
+                    
+                    <div id="chat-box">
+                        <!-- Messages will appear here dynamically -->
+                    </div>
+                    
+                    <div class="message-input">
+                        <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off">
+                        <button id="send-message" class="icon-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Private Chat Interface -->
+                <div id="private-chat-interface" class="hidden">
+                    <div class="chat-header">
+                        <h2 id="private-chat-title">
+                            <i class="fas fa-user-secret"></i> Private Chat with <span id="private-recipient-name"></span>
+                        </h2>
+                        <button id="close-private-chat" class="icon-btn">
+                            <i class="fas fa-times"></i> Close
+                        </button>
+                    </div>
+                    
+                    <div id="private-chat-box">
+                        <!-- Private messages will appear here -->
+                    </div>
+                    
+                    <div class="message-input">
+                        <input type="text" id="private-chat-input" placeholder="Type your private message..." autocomplete="off">
+                        <button id="private-send-message" class="icon-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- User List for Private Chat -->
+                <div id="user-list-container" class="hidden">
+                    <div class="section-header">
+                        <h2><i class="fas fa-users"></i> Online Users</h2>
+                    </div>
+                    <div id="user-list">
+                        <!-- Users will appear here dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
