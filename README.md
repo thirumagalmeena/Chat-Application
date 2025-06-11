@@ -113,10 +113,10 @@ gcc client.c -o client -lpthread
 
 ## Contributors
 
-- **Thirumagal Meena A ** 
-- Applied Mathematics and Computational Sciences
-- Psg College of Technology
+**Thirumagal Meena A**  
+Applied Mathematics and Computational Sciences  
+Psg College of Technology  
 
-- **Pon Nigitha G** 
-- Applied Mathematics and Computational Sciences
-- Psg College of Technology
+**Pon Nigitha G**  
+Applied Mathematics and Computational Sciences  
+Psg College of Technology
